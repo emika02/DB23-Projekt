@@ -19,7 +19,7 @@ def get_db_connection():
 def index():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM zadanie;')
+    cur.execute('SELECT * FROM zadanie ORDER BY id_zadanie ASC;')
     zadanie = cur.fetchall()
     cur.close()
     conn.close()
@@ -29,7 +29,7 @@ def index():
 def index_dokumenty():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM dokumenty;')
+    cur.execute('SELECT * FROM dokumenty ORDER BY id_dokumenty ASC;')
     dokumenty = cur.fetchall()
     cur.close()
     conn.close()
@@ -39,7 +39,7 @@ def index_dokumenty():
 def index_pracownicy():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM pracownicy;')
+    cur.execute('SELECT * FROM pracownicy ORDER BY id_pracownik ASC;')
     pracownicy = cur.fetchall()
     cur.close()
     conn.close()
@@ -49,7 +49,7 @@ def index_pracownicy():
 def index_lokalizacja():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM lokalizacja;')
+    cur.execute('SELECT * FROM lokalizacja ORDER BY id_lokalizacja ASC;')
     lokalizacja = cur.fetchall()
     cur.close()
     conn.close()
@@ -59,7 +59,7 @@ def index_lokalizacja():
 def index_obszar():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM obszar;')
+    cur.execute('SELECT * FROM obszar ORDER BY id_obszar ASC;')
     obszar = cur.fetchall()
     cur.close()
     conn.close()
@@ -69,7 +69,7 @@ def index_obszar():
 def index_prace():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM prace;')
+    cur.execute('SELECT * FROM prace ORDER BY id_praca ASC;')
     prace = cur.fetchall()
     cur.close()
     conn.close()
@@ -79,7 +79,7 @@ def index_prace():
 def index_specjalność():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM specjalność;')
+    cur.execute('SELECT * FROM specjalność ORDER BY id_specjalnosc ASC;')
     specjalność = cur.fetchall()
     cur.close()
     conn.close()
