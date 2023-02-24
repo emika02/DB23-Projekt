@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Dokumenty {% endblock %}</h1>
+    {% for Dokument in dokumenty %}
+        <div class='Dokumenty'>
+            <h3># Pracownik: {{ Dokument[0] }} specjalność: {{ Dokument[1] }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}

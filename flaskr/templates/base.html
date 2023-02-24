@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} - Ogród_botaniczny</title>
+    <style>
+        nav a {
+            color: #d64161;
+            font-size: 3em;
+            margin-left: 50px;
+            text-decoration: none;
+        }
+
+        .book {
+            padding: 20px;
+            margin: 10px;
+            background-color: #f7f4f4;
+        }
+
+        .review {
+                margin-left: 50px;
+                font-size: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Zadania</a>
+        <a href="{{ url_for('create') }}">Dodaj do zadanie bazy</a>
+        <a href="{{ url_for('index_dokumenty') }}">Dokumenty</a>
+        <a href="{{ url_for('create_dokumenty') }}">Dodaj dokumenty do bazy</a>
+        <a href="{{ url_for('index_pracownicy') }}">Pracownicy</a>
+        <a href="{{ url_for('create_pracownicy') }}">Dodaj pracowników do bazy</a>
+        <a href="{{ url_for('index_lokalizacja') }}">Lokalizacje</a>
+        <a href="{{ url_for('create_lokalizacja') }}">Dodaj lokalizacje do bazy</a>
+    </nav>
+    <hr>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>

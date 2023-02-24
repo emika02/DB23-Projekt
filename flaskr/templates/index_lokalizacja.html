@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Lokalizacje {% endblock %}</h1>
+    {% for Lokalizacja in lokalizacja %}
+        <div class='Lokalizacja'>
+            <h3># id: {{ Lokalizacja[0] }} nazwa: {{ Lokalizacja[1] }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}

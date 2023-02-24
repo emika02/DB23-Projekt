@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Dodaj nowych pracowników {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="id_pracownik">id_pracownik</label>
+            <input type="text" name="id_pracownik"
+                   placeholder="id_pracownik">
+            </input>
+        </p>
+        <p>
+            <label for="imie">imie</label>
+            <input type="text" name="imie"
+                   placeholder="imie">
+            </input>
+        </p>
+        <p>
+            <label for="nazwisko">nazwisko</label>
+            <input type="text" name="nazwisko"
+                   placeholder="nazwisko">
+            </input>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{% endblock %}

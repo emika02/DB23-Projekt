@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Pracownicy {% endblock %}</h1>
+    {% for Pracownik in pracownicy %}
+        <div class='Pracownicy'>
+            <h3># id:  {{Pracownik[0]}} imię: {{ Pracownik[1] }} nazwisko: {{ Pracownik[2] }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}

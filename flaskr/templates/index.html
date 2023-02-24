@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Zadania {% endblock %}</h1>
+    {% for Zadanie in zadanie %}
+        <div class='Zadanie'>
+            <h3>#{{ Zadanie[0] }} - {{ Zadanie[1] }} TERMIN: {{ Zadanie[2] }}</h3>
+            <p>id_pracownika: {{ Zadanie[3] }}</p>
+            <p> id_specjalności:{{ Zadanie[4] }}</p>
+            <p>id_pracy: {{ Zadanie[5] }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
