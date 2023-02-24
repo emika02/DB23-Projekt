@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Specjalności {% endblock %}</h1>
+    {% for Specjalnosc in specjalność %}
+        <div class='Specjalnosc'>
+            <h3># id:  {{Specjalnosc[0]}} nazwa: {{Specjalnosc[1] }} </h3>
+        </div>
+    {% endfor %}
+{% endblock %}

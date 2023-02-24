@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Dodaj nowe lokalizacje {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="id_obszar">id_obszar</label>
+            <input type="text" name="id_obszar"
+                   placeholder="id_obszar">
+            </input>
+        </p>
+        <p>
+            <label for="nazwa_obszar">nazwa_obszar</label>
+            <input type="text" name="nazwa_obszar"
+                   placeholder="nazwa_obszar">
+            </input>
+        </p>
+        <p>
+            <label for="lokalizacja_id_lokalizacja">lokalizacja_id_lokalizacja</label>
+            <input type="text" name="lokalizacja_id_lokalizacja"
+                   placeholder="lokalizacja_id_lokalizacja">
+            </input>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{% endblock %}

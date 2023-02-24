@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Dodaj nowe prace {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="id_praca">id_praca</label>
+            <input type="text" name="id_praca"
+                   placeholder="id_praca">
+            </input>
+        </p>
+        <p>
+            <label for="nazwa_praca">nazwa_praca</label>
+            <input type="text" name="nazwa_praca"
+                   placeholder="nazwa_praca">
+            </input>
+        </p>
+        <p>
+            <label for="obszar_id_obszar">obszar_id_obszar</label>
+            <input type="text" name="obszar_id_obszar"
+                   placeholder="obszar_id_obszar">
+            </input>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{% endblock %}

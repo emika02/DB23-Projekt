@@ -2,6 +2,7 @@ import os
 import psycopg2
 from flask import Flask, render_template
 from flask import request, url_for, redirect
+import pyodbc
 
 
 app = Flask(__name__, template_folder='templates')
@@ -53,6 +54,36 @@ def index_lokalizacja():
     cur.close()
     conn.close()
     return render_template('index_lokalizacja.html',lokalizacja=lokalizacja)
+
+@app.route('/obszar/')
+def index_obszar():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM obszar;')
+    obszar = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('index_obszar.html',obszar=obszar)
+
+@app.route('/prace/')
+def index_prace():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM prace;')
+    prace = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('index_prace.html',prace=prace)
+
+@app.route('/specjalność/')
+def index_specjalność():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM specjalność;')
+    specjalność = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('index_specjalność.html',specjalność=specjalność)
     
     
 #adding new records
@@ -133,6 +164,80 @@ def create_lokalizacja():
         return redirect(url_for('index_lokalizacja'))
 
     return render_template('create_lokalizacja.html')
+
+@app.route('/create_obszar/', methods=('GET', 'POST'))
+def create_obszar():
+    if request.method == 'POST':
+        id_obszar = int(request.form['id_obszar'])
+        nazwa_obszar= request.form['nazwa_obszar']
+        lokalizacja_id_lokalizacja = int(request.form['lokalizacja_id_lokalizacja'])
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('INSERT INTO obszar(id_obszar, nazwa_obszar,lokalizacja_id_lokalizacja)'
+                    'VALUES (%s, %s,%s)',
+                    (id_obszar,nazwa_obszar,lokalizacja_id_lokalizacja))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('index_obszar'))
+
+    return render_template('create_obszar.html')
+
+@app.route('/create_prace/', methods=('GET', 'POST'))
+def create_prace():
+    if request.method == 'POST':
+        id_praca = int(request.form['id_praca'])
+        nazwa_praca= request.form['nazwa_praca']
+        obszar_id_obszar = int(request.form['obszar_id_obszar'])
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('INSERT INTO prace(id_praca,nazwa_praca,obszar_id_obszar)'
+                    'VALUES (%s, %s,%s)',
+                    (id_praca,nazwa_praca,obszar_id_obszar))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('index_prace'))
+
+    return render_template('create_prace.html')
+
+@app.route('/create_specjalność/', methods=('GET', 'POST'))
+def create_specjalność():
+    if request.method == 'POST':
+        id_specjalnosc = int(request.form['id_specjalnosc'])
+        nazwa_specjalnosc= request.form['nazwa_specjalnosc']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('INSERT INTO prace(id_specjalnosc,nazwa_specjalnosc)'
+                    'VALUES (%s, %s)',
+                    (id_specjalnosc,nazwa_specjalnosc))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('index_specjalność'))
+
+    return render_template('create_specjalność.html')
+
+
+@app.route('/edit_termin/', methods=('GET', 'POST'))
+def edit_termin():
+    if request.method == 'POST':
+        id_zadanie = int(request.form['id_zadanie'])
+        nowy_termin = request.form['nowy_termin']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('UPDATE zadanie SET termin = (%s)'
+                    'WHERE id_zadanie = (%s)',
+                    (nowy_termin, id_zadanie)
+                    )
+   
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('index'))
+
+    return render_template('edit_termin.html')
+
 
 # if running this module as a standalone program (cf. command in the Python Dockerfile)
 if __name__ == "__main__":

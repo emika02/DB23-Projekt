@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Dodaj nowe specjalności {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="id_specjalnosc">id_specjalnosc</label>
+            <input type="text" name="id_specjalnosc"
+                   placeholder="id_specjalnosc">
+            </input>
+        </p>
+        <p>
+            <label for="nazwa_specjalnosc">nazwa_specjalnosc</label>
+            <input type="text" name="nazwa_specjalnosc"
+                   placeholder="nazwa_specjalnosc">
+            </input>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{% endblock %}

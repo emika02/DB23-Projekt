@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Prace {% endblock %}</h1>
+    {% for Praca in prace %}
+        <div class='Prace'>
+            <h3># id: {{ Praca[0] }} nazwa: {{ Praca[1] }} obszar:{{ Praca[2] }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}

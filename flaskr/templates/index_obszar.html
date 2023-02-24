@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Obszary {% endblock %}</h1>
+    {% for Obszar in obszar %}
+        <div class='Obszar'>
+            <h3># id: {{ Obszar[0] }} nazwa: {{ Obszar[1] }} lokalizacja:{{ Obszar[2] }}</h3>
+        </div>
+    {% endfor %}
+{% endblock %}
