@@ -4,16 +4,10 @@ from flask import Flask, render_template
 from flask import request, url_for, redirect
 import pyodbc
 
+from get_db_connection import get_db_connection
+
 
 app = Flask(__name__, template_folder='templates')
-
-def get_db_connection():
-    conn = psycopg2.connect(host='localhost',
-                            database='Projekt_bazy',
-                            user='postgres',#os.environ['DB_USERNAME'],
-                            password='root')#os.environ['DB_PASSWORD'])
-    return conn
-
 
 @app.route('/')
 def index():
@@ -25,11 +19,21 @@ def index():
     conn.close()
     return render_template('index.html', zadanie=zadanie)
 
+@app.route('/wolne_zadania/')
+def wolne_zadania():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM zadanie WHERE pracownicy_id_pracownik IS NULL ORDER BY termin ASC;')
+    zadanie = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('index.html', zadanie=zadanie)
+
 @app.route('/dokumenty/')
 def index_dokumenty():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT * FROM dokumenty ORDER BY id_dokumenty ASC;')
+    cur.execute('SELECT * FROM dokumenty;')
     dokumenty = cur.fetchall()
     cur.close()
     conn.close()
@@ -85,13 +89,8 @@ def index_specjalność():
     conn.close()
     return render_template('index_specjalność.html',specjalność=specjalność)
     
-    
-#adding new records
-
-
-
-@app.route('/create/', methods=('GET', 'POST'))
-def create():
+@app.route('/create_zp/', methods=('GET', 'POST'))
+def create_zp():
     if request.method == 'POST':
         id_zadanie = int(request.form['id_zadanie'])
         nazwa_zadanie = request.form['nazwa_zadanie']
@@ -110,7 +109,28 @@ def create():
         conn.close()
         return redirect(url_for('index'))
 
-    return render_template('create.html')
+    return render_template('create_zp.html')
+
+@app.route('/create_bp/', methods=('GET', 'POST'))
+def create_bp():
+    if request.method == 'POST':
+        id_zadanie = int(request.form['id_zadanie'])
+        nazwa_zadanie = request.form['nazwa_zadanie']
+        termin = request.form['termin']
+        specjalność_id_specjalnosc= int(request.form['specjalność_id_specjalnosc'])
+        prace_id_praca= int(request.form['prace_id_praca'])
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('INSERT INTO zadanie (id_zadanie, nazwa_zadanie, termin, specjalność_id_specjalnosc,prace_id_praca)'
+                    'VALUES (%s, %s, %s, %s,%s)',
+                    (id_zadanie,nazwa_zadanie,termin,specjalność_id_specjalnosc,prace_id_praca))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('index'))
+
+    return render_template('create_bp.html')
 
 @app.route('/create_dokumenty/', methods=('GET', 'POST'))
 def create_dokumenty():
@@ -227,8 +247,8 @@ def edit_termin():
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('UPDATE zadanie SET termin = (%s)'
-                    'WHERE id_zadanie = (%s)',
-                    (nowy_termin, id_zadanie)
+                    'WHERE id_zadanie = (%s) AND termin NOT IN (SELECT termin FROM Zadanie WHERE Pracownicy_id_pracownik IN (SELECT Pracownicy_id_pracownik FROM zadanie WHERE id_zadanie = (%s)))',
+                    (nowy_termin, id_zadanie,id_zadanie)
                     )
    
         conn.commit()
@@ -237,6 +257,26 @@ def edit_termin():
         return redirect(url_for('index'))
 
     return render_template('edit_termin.html')
+
+@app.route('/edit_pracownik/', methods=('GET', 'POST'))
+def edit_pracownik():
+    if request.method == 'POST':
+        id_zadanie = int(request.form['id_zadanie'])
+        pracownicy_id_pracownik = request.form['id_pracownik']
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('UPDATE zadanie SET pracownicy_id_pracownik = (%s)'
+                    'WHERE id_zadanie = (%s)  AND termin NOT IN (SELECT termin FROM zadanie WHERE pracownicy_id_pracownik = (%s))',
+                    (pracownicy_id_pracownik, id_zadanie,pracownicy_id_pracownik)
+                    )
+   
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('index'))
+
+    return render_template('edit_pracownik.html')
+
 
 
 # if running this module as a standalone program (cf. command in the Python Dockerfile)

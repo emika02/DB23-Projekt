@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Przydziel pracownika do zadania {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="id_zadanie">id_zadanie</label>
+            <input type="text" name="id_zadanie"
+                   placeholder="id_zadanie">
+            </input>
+        </p>
+        <p>
+            <label for="id_pracownik">id_pracownik</label>
+            <input type="text" name="id_pracownik"
+                   placeholder="id_pracownik">
+            </input>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{% endblock %}

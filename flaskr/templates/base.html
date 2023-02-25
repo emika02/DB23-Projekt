@@ -6,7 +6,7 @@
     <style>
         nav a {
             color: #d64161;
-            font-size: 3em;
+            font-size: 1.5em;
             margin-left: 50px;
             text-decoration: none;
         }
@@ -26,21 +26,24 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('index') }}">Zadania</a>
-        <a href="{{ url_for('create') }}">Dodaj do zadanie bazy</a>
-        <a href="{{ url_for('index_dokumenty') }}">Dokumenty</a>
-        <a href="{{ url_for('create_dokumenty') }}">Dodaj dokumenty do bazy</a>
-        <a href="{{ url_for('index_pracownicy') }}">Pracownicy</a>
-        <a href="{{ url_for('create_pracownicy') }}">Dodaj pracowników do bazy</a>
-        <a href="{{ url_for('index_lokalizacja') }}">Lokalizacje</a>
-        <a href="{{ url_for('create_lokalizacja') }}">Dodaj lokalizacje do bazy</a>
-        <a href="{{ url_for('index_obszar') }}">Obszary</a>
-        <a href="{{ url_for('create_obszar') }}">Dodaj obszar do bazy</a>
-        <a href="{{ url_for('index_prace') }}">Prace</a>
-        <a href="{{ url_for('create_prace') }}">Dodaj prace do bazy</a>
-        <a href="{{ url_for('index_specjalność') }}">Specjalności</a>
-        <a href="{{ url_for('create_specjalność') }}">Dodaj specjalność do bazy</a>
+        <a href="{{ url_for('index') }}">Przeglądaj zadania</a>
+        <a href="{{ url_for('create_zp') }}">Dodaj zadanie (z przydzielonym pracownikiem)</a>
+        <a href="{{ url_for('create_bp') }}">Dodaj zadanie (bez pracownika)</a>
+        <a href="{{ url_for('index_dokumenty') }}">Przeglądaj dokumenty</a>
+        <a href="{{ url_for('create_dokumenty') }}">Dodaj dokumenty</a>
+        <a href="{{ url_for('index_pracownicy') }}">Przeglądaj pracowników</a>
+        <a href="{{ url_for('create_pracownicy') }}">Dodaj pracowników</a>
+        <a href="{{ url_for('index_lokalizacja') }}">Przeglądaj lokalizacje</a>
+        <a href="{{ url_for('create_lokalizacja') }}">Dodaj lokalizację</a>
+        <a href="{{ url_for('index_obszar') }}">Przeglądaj obszary</a>
+        <a href="{{ url_for('create_obszar') }}">Dodaj obszar</a>
+        <a href="{{ url_for('index_prace') }}">Przeglądaj prace</a>
+        <a href="{{ url_for('create_prace') }}">Dodaj pracę</a>
+        <a href="{{ url_for('index_specjalność') }}">Przeglądaj specjalności</a>
+        <a href="{{ url_for('create_specjalność') }}">Dodaj specjalność</a>
         <a href="{{ url_for('edit_termin') }}">Zmień termin zadania</a>
+        <a href="{{ url_for('edit_pracownik') }}">Przydziel pracownika do zadania</a>
+        <a href="{{ url_for('wolne_zadania') }}">Zobacz, które zadania w najbliższtch terminach nie są przydzielone</a>
 
     </nav>
     <hr>

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Dodaj nowe zadanie(bez pracownika) {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="id_zadanie">id_zadanie</label>
+            <input type="text" name="id_zadanie"
+                   placeholder="ID_zadanie">
+            </input>
+        </p>
+
+        <p>
+            <label for="nazwa_zadanie">nazwa_zadanie</label>
+            <input type="text" name="nazwa_zadanie"
+                   placeholder="nazwa_zadanie">
+            </input>
+        </p>
+
+        <p>
+            <label for="termin">termin</label>
+            <input type="text" name="termin"
+                   placeholder="termin">
+            </input>
+        </p>
+        <p>
+            <label for="specjalność_id_specjalnosc">specjalność_id_specjalnosc</label>
+            <input type="text" name="specjalność_id_specjalnosc"
+                   placeholder="specjalność_id_specjalnosc">
+            </input>
+        </p>
+        <p>
+            <label for="prace_id_praca">prace_id_praca</label>
+            <input type="text" name="prace_id_praca"
+                   placeholder="prace_id_praca">
+            </input>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{% endblock %}
