@@ -1,13 +1,15 @@
 import os
 import psycopg2
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory, current_app
 from flask import request, url_for, redirect
 import pyodbc
 
 from get_db_connection import get_db_connection
 
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__,
+            static_folder='static',
+            template_folder='templates')
 
 @app.route('/')
 def index():
@@ -38,6 +40,7 @@ def index_dokumenty():
     cur.close()
     conn.close()
     return render_template('index_dokumenty.html', dokumenty=dokumenty)
+
 
 @app.route('/pracownicy/')
 def index_pracownicy():
@@ -277,7 +280,9 @@ def edit_pracownik():
 
     return render_template('edit_pracownik.html')
 
-
+#@app.route('/', methods=['POST'])
+#def plan(): 
+#    return current_app.send_static_file('plan.html')
 
 # if running this module as a standalone program (cf. command in the Python Dockerfile)
 if __name__ == "__main__":
